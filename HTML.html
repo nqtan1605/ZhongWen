@@ -4,62 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Quiz - Chọn đáp án đúng</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 40px;
-            /* max-width: 600px; */
-            margin: auto;
-            text-align: center;
-            height: 100vh;
-        }
-
-        .quiz-container {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            height: 100vh;
-        }
-
-        .question {
-            font-size: 30px;
-            margin-bottom: 20px;
-        }
-
-        .option {
-            margin: 10px 0;
-            font-size: 30px;
-            width: fit-content;
-            padding-left: 675px;
-            text-align: left !important;
-        }
-
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 30px;
-            cursor: pointer;
-            border-radius: 10px;
-        }
-
-        button:hover {
-            background-color: orangered;
-            border: none;
-        }
-
-        #result {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
 
     <div id="quiz-container"></div>
-
+    <div id="main-menu">
+        <ul>
+            <li><a href="/HTML.html">汉语 - 越南语</a></li>
+            <li><a href="/HTML2.html">越南语 - 汉语</a></li>
+        </ul>
+    </div>
     <script>
         const questions = [
             { question: "Bây giờ", options: ["现在", "一起", "走", "借"], correct: "现在", pinyin: "xiànzài" },

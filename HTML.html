@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz - Chọn đáp án đúng</title>
+    <link rel="stylesheet" href="https://nqtan1605.github.io/ZhongWen/style.css">
+</head>
+
+<body>
+
+    <div id="quiz-container"></div>
+    <div id="main-menu">
+        <ul>
+            <li><a href="/HTML.html">汉语 - 越南语</a></li>
+            <li><a href="/HTML2.html">越南语 - 汉语</a></li>
+        </ul>
+    </div>
+    <script>
+        const questions = [
+            { question: "Bây giờ", options: ["现在", "一起", "走", "借"], correct: "现在", pinyin: "xiànzài" },
+            { question: "Cùng với", options: ["跟", "咱们", "常", "上网"], correct: "跟", pinyin: "gēn" },
+            { question: "Cùng nhau", options: ["一起", "时候", "走", "借"], correct: "一起", pinyin: "yīqǐ" },
+            { question: "Chúng ta", options: ["咱们", "跟", "有時候", "上网"], correct: "咱们", pinyin: "zánmen" },
+            { question: "Đi", options: ["走", "一起", "借", "常"], correct: "走", pinyin: "zǒu" },
+            { question: "Thường", options: ["常", "现在", "咱们", "时候"], correct: "常", pinyin: "cháng" },
+            { question: "Đôi khi", options: ["有時候", "跟", "走", "上网"], correct: "有時候", pinyin: "yǒu shíhòu" },
+            { question: "Thời điểm", options: ["时候", "一起", "常", "借"], correct: "时候", pinyin: "shíhòu" },
+            { question: "Mượn", options: ["借", "现在", "咱们", "有時候"], correct: "借", pinyin: "jiè" },
+            { question: "Lên mạng", options: ["上网", "跟", "走", "时候"], correct: "上网", pinyin: "shàngwǎng" },
+            { question: "Tra cứu", options: ["查", "资料", "安静", "练习"], correct: "查", pinyin: "chá" },
+            { question: "Tài liệu", options: ["资料", "总", "复习", "或者"], correct: "资料", pinyin: "zīliào" },
+            { question: "Luôn luôn", options: ["总", "查", "课文", "生词"], correct: "总", pinyin: "zǒng" },
+            { question: "Yên tĩnh", options: ["安静", "预习", "资料", "练习"], correct: "安静", pinyin: "ānjìng" },
+            { question: "Ôn tập", options: ["复习", "总", "或者", "查"], correct: "复习", pinyin: "fùxí" },
+            { question: "Bài khóa", options: ["课文", "安静", "生词", "资料"], correct: "课文", pinyin: "kèwén" },
+            { question: "Chuẩn bị bài", options: ["预习", "复习", "练习", "总"], correct: "预习", pinyin: "yùxí" },
+            { question: "Từ mới", options: ["生词", "查", "课文", "或者"], correct: "生词", pinyin: "shēngcí" },
+            { question: "Hoặc là", options: ["或者", "安静", "预习", "资料"], correct: "或者", pinyin: "huòzhě" },
+            { question: "Luyện tập", options: ["练习", "总", "生词", "复习"], correct: "练习", pinyin: "liànxí" },
+            { question: "Trò chuyện", options: ["聊天儿", "收发", "电影", "休息"], correct: "聊天儿", pinyin: "liáotiānr" },
+            { question: "Gửi nhận", options: ["收发", "伊妹儿", "宿舍", "发"], correct: "收发", pinyin: "shōufā" },
+            { question: "Nhận", options: ["收", "聊天儿", "电视剧", "公园"], correct: "收", pinyin: "shōu" },
+            { question: "Gửi", options: ["发", "收发", "休息", "电影"], correct: "发", pinyin: "fā" },
+            { question: "Email", options: ["伊妹儿", "收", "宿舍", "聊天儿"], correct: "伊妹儿", pinyin: "yīmeìr" },
+            { question: "Phim điện ảnh", options: ["电影", "发", "电视剧", "公园"], correct: "电影", pinyin: "diànyǐng" },
+            { question: "Phim truyền hình", options: ["电视剧", "伊妹儿", "休息", "收发"], correct: "电视剧", pinyin: "diànshìjù" },
+            { question: "Nghỉ ngơi", options: ["休息", "电影", "宿舍", "发"], correct: "休息", pinyin: "xiūxí" },
+            { question: "Ký túc xá", options: ["宿舍", "聊天儿", "公园", "电视剧"], correct: "宿舍", pinyin: "sùshè" },
+            { question: "Công viên", options: ["公园", "收", "休息", "伊妹儿"], correct: "公园", pinyin: "gōngyuán" },
+            { question: "Siêu thị", options: ["超市", "书店", "机场", "教室"], correct: "超市", pinyin: "chāoshì" },
+            { question: "Đồ vật", options: ["东西", "包裹", "报纸", "蛋糕"], correct: "东西", pinyin: "dōngxī" },
+            { question: "Ở", options: ["在", "来", "出", "去"], correct: "在", pinyin: "zài" },
+            { question: "Ra ngoài", options: ["出来", "进去", "回来", "出发"], correct: "出来", pinyin: "chūlái" },
+            { question: "Đến", options: ["来", "走", "坐", "飞"], correct: "来", pinyin: "lái" },
+            { question: "Đang", options: ["正在", "已经", "马上", "刚刚"], correct: "正在", pinyin: "zhèngzài" },
+            { question: "Âm nhạc", options: ["音乐", "文化", "体育", "展览"], correct: "音乐", pinyin: "yīnyuè" },
+            { question: "Không có", options: ["没有", "不用", "没问题", "不合适"], correct: "没有", pinyin: "méiyǒu" },
+            { question: "Đúng", options: ["正", "好", "坏", "差"], correct: "正", pinyin: "zhèng" },
+            { question: "Thu âm", options: ["录音", "听力", "口语", "阅读"], correct: "录音", pinyin: "lùyīn" },
+            { question: "Việc", options: ["事", "课", "时间", "问题"], correct: "事", pinyin: "shì" },
+            { question: "Hiệu sách", options: ["书店", "超市", "机场", "操场"], correct: "书店", pinyin: "shūdiàn" },
+            { question: "Muốn", options: ["想", "准备", "打算", "希望"], correct: "想", pinyin: "xiǎng" },
+            { question: "Từ điển Hán-Anh", options: ["汉英", "英汉", "汉语", "英文"], correct: "汉英", pinyin: "hànyīng" },
+            { question: "Ngồi", options: ["坐", "站", "走", "跑"], correct: "坐", pinyin: "zuò" },
+            { question: "Chen chúc", options: ["挤", "空", "满", "忙"], correct: "挤", pinyin: "jǐ" },
+            { question: "Đạp xe", options: ["骑", "开", "坐", "走"], correct: "骑", pinyin: "qí" },
+            { question: "Đi", options: ["行", "来", "出", "回"], correct: "行", pinyin: "xíng" },
+            { question: "Cửa", options: ["门", "窗", "墙", "桌"], correct: "门", pinyin: "mén" },
+            { question: "Bài học", options: ["课", "书", "作业", "考试"], correct: "课", pinyin: "kè" },
+            { question: "Tổng hợp", options: ["综合", "简单", "基础", "高级"], correct: "综合", pinyin: "zōnghé" },
+            { question: "Khẩu ngữ", options: ["口语", "听力", "阅读", "写作"], correct: "口语", pinyin: "kǒuyǔ" },
+            { question: "Nghe", options: ["听力", "口语", "阅读", "翻译"], correct: "听力", pinyin: "tīnglì" },
+            { question: "Đọc", options: ["阅读", "写作", "听力", "口语"], correct: "阅读", pinyin: "yuèdú" },
+            { question: "Văn hóa", options: ["文化", "体育", "音乐", "艺术"], correct: "文化", pinyin: "wénhuà" },
+            { question: "Thể thao", options: ["体育", "音乐", "文化", "展览"], correct: "体育", pinyin: "tǐyù" },
+            { question: "Dạy", options: ["教", "学", "读", "写"], correct: "教", pinyin: "jiāo" },
+            { question: "Bưu kiện", options: ["包裹", "信", "报纸", "书"], correct: "包裹", pinyin: "bāoguǒ" },
+            { question: "Tiện thể", options: ["顺便", "故意", "专门", "随便"], correct: "顺便", pinyin: "shùnbiàn" },
+            { question: "Thay", options: ["替", "帮", "给", "为"], correct: "替", pinyin: "tì" },
+            { question: "Tem thư", options: ["邮票", "信封", "包裹", "卡片"], correct: "邮票", pinyin: "yóupiào" },
+            { question: "Phần", options: ["份", "件", "个", "本"], correct: "份", pinyin: "fèn" },
+            { question: "Thanh niên", options: ["青年", "老人", "儿童", "学生"], correct: "青年", pinyin: "qīngnián" },
+            { question: "Báo", options: ["报", "书", "信", "纸"], correct: "报", pinyin: "bào" },
+            { question: "Tờ báo", options: ["报纸", "杂志", "书", "信"], correct: "报纸", pinyin: "bàozhǐ" },
+            { question: "Cầm", options: ["拿", "放", "丢", "扔"], correct: "拿", pinyin: "ná" },
+            { question: "Không cần", options: ["不用", "不要", "不许", "不可以"], correct: "不用", pinyin: "bùyòng" },
+            { question: "Dùng", options: ["用", "吃", "喝", "穿"], correct: "用", pinyin: "yòng" },
+            { question: "Du lịch", options: ["旅行", "工作", "学习", "运动"], correct: "旅行", pinyin: "lǚxíng" },
+            { question: "Đại diện", options: ["代表", "领导", "老师", "朋友"], correct: "代表", pinyin: "dàibiǎo" },
+            { question: "Đoàn", options: ["团", "队", "班", "组"], correct: "团", pinyin: "tuán" },
+            { question: "Tham quan", options: ["参观", "学习", "工作", "休息"], correct: "参观", pinyin: "cānguān" },
+            { question: "Làm", options: ["当", "做", "干", "办"], correct: "当", pinyin: "dāng" },
+            { question: "Phiên dịch", options: ["翻译", "口语", "听力", "写作"], correct: "翻译", pinyin: "fānyì" },
+            { question: "Máy bay", options: ["飞机", "火车", "汽车", "船"], correct: "飞机", pinyin: "fēijī" },
+            { question: "Bay", options: ["飞", "跑", "走", "跳"], correct: "飞", pinyin: "fēi" },
+            { question: "Tàu hỏa", options: ["火车", "飞机", "汽车", "地铁"], correct: "火车", pinyin: "huǒchē" },
+            { question: "Trở về", options: ["回来", "出去", "进来", "出发"], correct: "回来", pinyin: "huílái" },
+            { question: "Làm", options: ["办", "做", "干", "学"], correct: "办", pinyin: "bàn" },
+            { question: "Giúp", options: ["帮", "替", "给", "借"], correct: "帮", pinyin: "bāng" },
+            { question: "Tưới", options: ["浇", "种", "洗", "剪"], correct: "浇", pinyin: "jiāo" },
+            { question: "Hoa", options: ["花", "树", "草", "果"], correct: "花", pinyin: "huā" },
+            { question: "Không sao", options: ["没问题", "有问题", "不好", "没事"], correct: "没问题", pinyin: "méi wèntí" },
+            { question: "Vấn đề", options: ["问题", "答案", "事情", "困难"], correct: "问题", pinyin: "wèntí" },
+            { question: "Áo lông vũ", options: ["羽绒服", "毛衣", "外套", "衬衫"], correct: "羽绒服", pinyin: "yǔróngfú" },
+            { question: "Vừa…vừa", options: ["又……又", "和……和", "或……或", "不……不"], correct: "又……又", pinyin: "yòu...yòu" },
+            { question: "Rẻ", options: ["便宜", "贵", "好", "坏"], correct: "便宜", pinyin: "piányí" },
+            { question: "Đắt", options: ["贵", "便宜", "好", "差"], correct: "贵", pinyin: "guì" },
+            { question: "Dài", options: ["长", "短", "高", "低"], correct: "长", pinyin: "cháng" },
+            { question: "Ngắn", options: ["短", "长", "大", "小"], correct: "短", pinyin: "duǎn" },
+            { question: "Sâu", options: ["深", "浅", "高", "低"], correct: "深", pinyin: "shēn" },
+            { question: "Nông", options: ["浅", "深", "长", "短"], correct: "浅", pinyin: "qiǎn" },
+            { question: "Thử", options: ["试", "买", "卖", "看"], correct: "试", pinyin: "shì" },
+            { question: "Có thể", options: ["可以", "应该", "必须", "需要"], correct: "可以", pinyin: "kěyǐ" },
+            { question: "Tất nhiên", options: ["当然", "一定", "可能", "大概"], correct: "当然", pinyin: "dāngrán" },
+            { question: "Béo", options: ["肥", "瘦", "高", "矮"], correct: "肥", pinyin: "féi" },
+            { question: "Mũm mĩm", options: ["胖", "瘦", "高", "矮"], correct: "胖", pinyin: "pàng" },
+            { question: "Gầy", options: ["瘦", "胖", "肥", "矮"], correct: "瘦", pinyin: "shòu" },
+            { question: "Thích hợp", options: ["合适", "便宜", "贵", "好看"], correct: "合适", pinyin: "héshì" },
+            { question: "Đẹp", options: ["好看", "难看", "漂亮", "普通"], correct: "好看", pinyin: "hǎokàn" },
+            { question: "Loại", options: ["种", "类", "样", "款"], correct: "种", pinyin: "zhǒng" },
+            { question: "Giảm giá", options: ["打折", "涨价", "促销", "免费"], correct: "打折", pinyin: "dǎzhé" },
+            { question: "Bánh mì", options: ["面包", "蛋糕", "米饭", "面条"], correct: "面包", pinyin: "miànbāo" },
+            { question: "Giày", options: ["鞋", "袜", "帽子", "衣服"], correct: "鞋", pinyin: "xié" },
+            { question: "Đôi", options: ["双", "个", "只", "件"], correct: "双", pinyin: "shuāng" },
+            { question: "Áo len", options: ["毛衣", "外套", "衬衫", "裤子"], correct: "毛衣", pinyin: "máoyī" },
+            { question: "Nghe nói", options: ["听说", "看到", "知道", "觉得"], correct: "听说", pinyin: "tīngshuō" },
+            { question: "Mùa đông", options: ["冬天", "夏天", "春天", "秋天"], correct: "冬天", pinyin: "dōngtiān" },
+            { question: "Lạnh", options: ["冷", "热", "暖", "凉"], correct: "冷", pinyin: "lěng" },
+            { question: "Sân bay", options: ["机场", "车站", "码头", "广场"], correct: "机场", pinyin: "jīchǎng" },
+            { question: "Đón", options: ["接", "送", "带", "领"], correct: "接", pinyin: "jiē" },
+            { question: "Có thể", options: ["能", "会", "想", "要"], correct: "能", pinyin: "néng" },
+            { question: "Triển lãm", options: ["展览", "表演", "比赛", "会议"], correct: "展览", pinyin: "zhǎnlǎn" },
+            { question: "Dép sandal", options: ["凉鞋", "拖鞋", "运动鞋", "皮鞋"], correct: "凉鞋", pinyin: "liángxié" },
+            { question: "Dép xỏ ngón", options: ["拖鞋", "凉鞋", "靴子", "运动鞋"], correct: "拖鞋", pinyin: "tuōxié" },
+            { question: "Mặc", options: ["穿", "吃", "喝", "用"], correct: "穿", pinyin: "chuān" },
+            { question: "Năm", options: ["年", "月", "日", "周"], correct: "年", pinyin: "nián" },
+            { question: "Năm nay ", options: ["今年", "明年", "去年", "后年"], correct: "今年", pinyin: "jīnnián" },
+            { question: "Năm sau", options: ["明年", "今年", "后年", "去年"], correct: "明年", pinyin: "míngnián" },
+            { question: "Tốt nghiệp", options: ["毕业", "入学", "考试", "学习"], correct: "毕业", pinyin: "bìyè" },
+            { question: "Bao nhiêu tuổi", options: ["多大", "多少", "多高", "多重"], correct: "多大", pinyin: "duō dà" },
+            { question: "Thuộc (con giáp)", options: ["属", "是", "有", "像"], correct: "属", pinyin: "shǔ" },
+            { question: "Chuột", options: ["鼠", "牛", "虎", "兔"], correct: "鼠", pinyin: "shǔ" },
+            { question: "Trâu", options: ["牛", "马", "羊", "猪"], correct: "牛", pinyin: "niú" },
+            { question: "Hổ", options: ["虎", "龙", "蛇", "猴"], correct: "虎", pinyin: "hǔ" },
+            { question: "Thỏ", options: ["兔", "鼠", "狗", "鸡"], correct: "兔", pinyin: "tù" },
+            { question: "Rồng", options: ["龙", "蛇", "马", "羊"], correct: "龙", pinyin: "lóng" },
+            { question: "Rắn", options: ["蛇", "虎", "兔", "猪"], correct: "蛇", pinyin: "shé" },
+            { question: "Ngựa", options: ["马", "牛", "羊", "狗"], correct: "马", pinyin: "mǎ" },
+            { question: "Dê", options: ["羊", "猪", "猴", "鸡"], correct: "羊", pinyin: "yáng" },
+            { question: "Khỉ", options: ["猴", "鼠", "虎", "兔"], correct: "猴", pinyin: "hóu" },
+            { question: "Gà", options: ["鸡", "狗", "猪", "牛"], correct: "鸡", pinyin: "jī" },
+            { question: "Chó", options: ["狗", "猫", "马", "羊"], correct: "狗", pinyin: "gǒu" },
+            { question: "Lợn", options: ["猪", "牛", "羊", "马"], correct: "猪", pinyin: "zhū" },
+            { question: "Tháng", options: ["月", "年", "日", "周"], correct: "月", pinyin: "yuè" },
+            { question: "Sinh nhật", options: ["生日", "节日", "纪念日", "假期"], correct: "生日", pinyin: "shēngrì" },
+            { question: "Vừa đúng", options: ["正好", "刚好", "差不多", "大约"], correct: "正好", pinyin: "zhènghǎo" },
+            { question: "Dự định", options: ["打算", "希望", "准备", "计划"], correct: "打算", pinyin: "dǎsuàn" },
+            { question: "Qua", options: ["过", "来", "去", "回"], correct: "过", pinyin: "guò" },
+            { question: "Chuẩn bị", options: ["准备", "打算", "开始", "结束"], correct: "准备", pinyin: "zhǔnbèi" },
+            { question: "Tổ chức", options: ["举行", "参加", "取消", "推迟"], correct: "举行", pinyin: "jǔxíng" },
+            { question: "Tiệc tối", options: ["晚会", "宴会", "会议", "展览"], correct: "晚会", pinyin: "wǎnhuì" },
+            { question: "Tham gia", options: ["参加", "退出", "拒绝", "取消"], correct: "参加", pinyin: "cānjiā" },
+            { question: "Thời gian", options: ["时间", "日期", "时刻", "期间"], correct: "时间", pinyin: "shíjiān" },
+            { question: "Giờ", options: ["点", "分", "秒", "刻"], correct: "点", pinyin: "diǎn" },
+            { question: "Liền", options: ["就", "才", "还", "又"], correct: "就", pinyin: "jiù" },
+            { question: "Nhất định", options: ["一定", "可能", "大概", "或许"], correct: "一定", pinyin: "yīdìng" },
+            { question: "Chúc", options: ["祝", "送", "给", "说"], correct: "祝", pinyin: "zhù" },
+            { question: "Vui vẻ", options: ["快乐", "难过", "生气", "伤心"], correct: "快乐", pinyin: "kuàilè" },
+            { question: "Tết", options: ["新年", "春节", "圣诞节", "中秋节"], correct: "新年", pinyin: "xīnnián" },
+            { question: "Năm tới nữa", options: ["后年", "明年", "去年", "今年"], correct: "后年", pinyin: "hòunián" },
+            { question: "Tết Nguyên Đán", options: ["春节", "新年", "圣诞节", "端午节"], correct: "春节", pinyin: "chūnjié" },
+            { question: "Giáng sinh", options: ["圣诞节", "春节", "新年", "中秋节"], correct: "圣诞节", pinyin: "shèngdànjié" },
+            { question: "Sức khỏe", options: ["健康", "幸福", "安全", "成功"], correct: "健康", pinyin: "jiànkāng" },
+            { question: "Năm sau nữa", options: ["大后年", "明年", "后年", "去年"], correct: "大后年", pinyin: "dàhòunián" },
+            { question: "Đồ chơi", options: ["玩具", "礼物", "书", "衣服"], correct: "玩具", pinyin: "wánjù" },
+            { question: "Bánh ngọt", options: ["蛋糕", "面包", "饼干", "糖果"], correct: "蛋糕", pinyin: "dàngāo" },
+            { question: "Sinh ra", options: ["出生", "成长", "生活", "死亡"], correct: "出生", pinyin: "chūshēng" },
+            { question: "Thú vị", options: ["有意思", "没意思", "有趣", "无聊"], correct: "有意思", pinyin: "yǒu yìsi" },
+            { question: "Mỗi", options: ["每", "所有", "一些", "任何"], correct: "每", pinyin: "měi" },
+            { question: "Buổi sáng", options: ["早上", "中午", "下午", "晚上"], correct: "早上", pinyin: "zǎoshang" },
+            { question: "Nửa", options: ["半", "全", "一", "二"], correct: "半", pinyin: "bàn" },
+            { question: "Dậy", options: ["起床", "睡觉", "洗澡", "吃饭"], correct: "起床", pinyin: "qǐchuáng" },
+            { question: "Giường", options: ["床", "桌子", "椅子", "沙发"], correct: "床", pinyin: "chuáng" },
+            { question: "Bữa sáng", options: ["早饭", "午饭", "晚饭", "点心"], correct: "早饭", pinyin: "zǎofàn" },
+            { question: "Bữa trưa", options: ["午饭", "早饭", "晚饭", "夜宵"], correct: "午饭", pinyin: "wǔfàn" },
+            { question: "Bữa tối", options: ["晚饭", "早饭", "午饭", "点心"], correct: "晚饭", pinyin: "wǎnfàn" },
+            { question: "Sau này", options: ["以后", "之前", "现在", "当时"], correct: "以后", pinyin: "yǐhòu" },
+            { question: "Kém", options: ["差", "好", "优", "良"], correct: "差", pinyin: "chà" },
+            { question: "Phút", options: ["分", "秒", "刻", "小时"], correct: "分", pinyin: "fēn" },
+            { question: "Học", options: ["上课", "下课", "放学", "考试"], correct: "上课", pinyin: "shàngkè" },
+            { question: "Tiết", options: ["节", "课", "时", "场"], correct: "节", pinyin: "jié" },
+            { question: "Phòng học", options: ["教室", "宿舍", "图书馆", "食堂"], correct: "教室", pinyin: "jiàoshì" },
+            { question: "Sân vận động", options: ["操场", "体育馆", "教室", "礼堂"], correct: "操场", pinyin: "cāochǎng" },
+            { question: "Tập thể dục", options: ["锻炼", "休息", "睡觉", "吃饭"], correct: "锻炼", pinyin: "duànliàn" },
+            { question: "Tắm", options: ["洗澡", "洗衣服", "洗碗", "洗车"], correct: "洗澡", pinyin: "xǐzǎo" },
+            { question: "Rửa", options: ["洗", "擦", "刷", "扫"], correct: "洗", pinyin: "xǐ" },
+            { question: "Sau đó", options: ["然后", "之前", "同时", "最后"], correct: "然后", pinyin: "ránhòu" },
+            { question: "Ngủ", options: ["睡觉", "起床", "吃饭", "工作"], correct: "睡觉", pinyin: "shuìjiào" },
+            { question: "Leo", options: ["爬", "跑", "跳", "走"], correct: "爬", pinyin: "pá" },
+            { question: "Chúng ta", options: ["们", "我", "你", "他"], correct: "们", pinyin: "men" },
+            { question: "Núi", options: ["山", "河", "海", "湖"], correct: "山", pinyin: "shān" },
+            { question: "Khối", options: ["年级", "班级", "学校", "学院"], correct: "年级", pinyin: "niánjí" },
+            { question: "Khởi hành", options: ["出发", "到达", "回来", "离开"], correct: "出发", pinyin: "chūfā" },
+            { question: "Trước", options: ["前", "后", "左", "右"], correct: "前", pinyin: "qián" },
+            { question: "Tập hợp", options: ["集合", "分散", "分开", "解散"], correct: "集合", pinyin: "jíhé" },
+            { question: "Khắc", options: ["刻", "分", "秒", "点"], correct: "刻", pinyin: "kè" },
+            { question: "Lên xe", options: ["上车", "下车", "开车", "停车"], correct: "上车", pinyin: "shàngchē" },
+            { question: "Xuống xe", options: ["下车", "上车", "停车", "开车"], correct: "下车", pinyin: "xiàchē" },
+            { question: "Đúng giờ", options: ["准时", "迟到", "早到", "延误"], correct: "准时", pinyin: "zhǔnshí" },
+            { question: "Mang", options: ["带", "拿", "送", "给"], correct: "带", pinyin: "dài" }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        // Hàm xáo trộn mảng
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]]; // Hoán đổi phần tử
+            }
+        }
+
+        function createQuestion(questionIndex) {
+            const questionData = questions[questionIndex];
+            const quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = ''; // Xóa câu hỏi cũ nếu có
+
+            const quizBlock = document.createElement('div');
+            quizBlock.classList.add('quiz-container');
+
+            const questionElement = document.createElement('div');
+            questionElement.classList.add('question');
+            questionElement.innerText = `Câu hỏi ${questionIndex + 1}: ${questionData.question}`;
+            quizBlock.appendChild(questionElement);
+
+            // Xáo trộn các đáp án
+            const shuffledOptions = [...questionData.options];
+            shuffleArray(shuffledOptions);
+
+            // Tạo các đáp án
+            shuffledOptions.forEach(option => {
+                const optionDiv = document.createElement('div');
+                optionDiv.classList.add('option');
+                const radioButton = document.createElement('input');
+                radioButton.type = 'radio';
+                radioButton.name = `answer`;
+                radioButton.value = option;
+                radioButton.onclick = function () {
+                    speak(option);
+                };
+                const label = document.createElement('label');
+                label.innerText = option;
+                optionDiv.appendChild(radioButton);
+                optionDiv.appendChild(label);
+                quizBlock.appendChild(optionDiv);
+            });
+
+            const resultDiv = document.createElement('div');
+            resultDiv.id = `result`;
+            quizBlock.appendChild(resultDiv);
+
+            const checkButton = document.createElement('button');
+            checkButton.innerText = 'Kiểm tra';
+            checkButton.onclick = () => checkAnswer(questionIndex);
+            quizBlock.appendChild(checkButton);
+
+            quizContainer.appendChild(quizBlock);
+        }
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-CN'; // Ngôn ngữ tiếng Trung
+            speechSynthesis.speak(utterance);
+        }
+
+        function checkAnswer(questionIndex) {
+
+
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            const resultDiv = document.getElementById('result');
+            const correctAnswer = questions[questionIndex].correct;
+            const correctPinyin = questions[questionIndex].pinyin;
+
+            if (!selectedOption) {
+                resultDiv.innerText = "Vui lòng chọn một đáp án!";
+                return;
+            }
+
+            if (selectedOption.value === correctAnswer) {
+                resultDiv.innerText = "✅ Chính xác! " + correctPinyin;
+                speak(correctAnswer);
+                setTimeout(() => {
+                    currentQuestionIndex++; if (currentQuestionIndex < questions.length) { createQuestion(currentQuestionIndex); } else { resultDiv.innerText = "🎉 Bạn đã hoàn thành bài quiz!"; }
+                }, 1000); // Chuyển sang câu hỏi tiếp theo sau 1 giây
+            } else {
+                resultDiv.innerText = `❌ Sai rồi. Đáp án đúng là: ${correctAnswer}`;
+                speak(selectedOption.value);
+            }
+        }
+
+        // Bắt đầu quiz
+        shuffleArray(questions);
+        createQuestion(currentQuestionIndex);
+    </script>
+
+</body>
+
+</html>

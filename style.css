@@ -2,7 +2,6 @@ body {
     font-family: Arial, sans-serif;
     /* max-width: 600px; */
     margin: auto;
-    text-align: center;
     height: 100vh;
     display: flex;
     /* overflow: visible; */
@@ -35,7 +34,7 @@ body {
     margin: 10px 0;
     font-size: 30px;
     width: fit-content;
-    padding-left: 700px;
+    /* padding-left: 700px; */
     text-align: left !important;
 }
 
@@ -69,7 +68,7 @@ button:hover {
 
 #main-menu ul{
     list-style-type: none;
-    padding: 0;
+    padding: 0 0 0 20px;
 }
 #main-menu ul li{
     padding: 20px 0;
@@ -81,4 +80,36 @@ button:hover {
 }
 #main-menu ul li a:hover{
     color: orange;
+}
+#content{
+    display: flex;
+    margin-left: 250px;
+    width: 100%;
+}
+#lesson-selector{
+    width: 20%;
+    padding: 100px 0 0 0;
+
+}
+#lesson-selector label{
+    color: aliceblue;
+}
+#lesson{
+    width: 50%;
+    height: 30px;
+    background-color: wheat;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 67, 9, 0.5);
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: 0.3s ease;
+    outline: none;
+}
+#lesson:focus{
+    border-color: rgba(255, 67, 9, 0.5);
+    box-shadow: 0 0 10px rgba(255, 67, 9, 0.5);
+}
+#quiz-container{
+    padding-left: 300px;
+    width: 80%;
 }

@@ -14,14 +14,6 @@
         <div id="lesson-selector">
             <label for="lesson">Chọn bài học:</label>
             <select id="lesson" onchange="onLessonChange()">
-                <option value="all">Tất cả</option>
-                <option value="18">Bài 16</option>
-                <option value="19">Bài 17</option>
-                <option value="20">Bài 18</option>
-                <option value="18">Bài 19</option>
-                <option value="19">Bài 20</option>
-                <option value="20">Bài 21</option>
-                <option value="20">Bài 22</option>
             </select>
         </div>
          <div id="quiz-container">
@@ -283,11 +275,15 @@
             { question: "Đường lớn", options: ["马路", "路", "中间", "从"], correct: "马路", pinyin: "mǎlù", lesson: 23 },
             { question: "Đường", options: ["路", "到", "足球场", "往"], correct: "路", pinyin: "lù", lesson: 23 },
             { question: "Tòa, chỗ", options: ["座", "红绿灯", "绿", "右"], correct: "座", pinyin: "zuò", lesson: 23 },
-            { question: "Màu trắng", options: ["白色", "地方", "米", "拐"], correct: "白色", pinyin: "báisè", lesson: 23 }
-        ];
+            { question: "Màu trắng", options: ["白色", "地方", "米", "拐"], correct: "白色", pinyin: "báisè", lesson: 23 }        ];
 
         let currentQuestionIndex = 0;
         let filteredQuestions = [...questions]; // Initialize with all questions
+
+        const lessons = [...new Set(questions.map(q => q.lesson))].sort((a, b) => a - b);
+        const select = document.getElementById('lesson');
+        select.innerHTML = '<option value="all">Tất cả</option>' + 
+        lessons.map(lesson => `<option value="${lesson}">Bài ${lesson}</option>`).join('');
 
         // Hàm xáo trộn mảng
         function shuffleArray(arr) {

@@ -443,7 +443,7 @@
             const resultDiv = document.getElementById('result');
             const correctAnswer = filteredQuestions[questionIndex].correct;
             const correctPinyin = filteredQuestions[questionIndex].pinyin;
-
+            const questionData = filteredQuestions[questionIndex];
             if (!selectedOption) {
                 resultDiv.innerText = "Vui lòng chọn một đáp án!";
                 return;
@@ -458,7 +458,7 @@
                 }, 1000); // Chuyển sang câu hỏi tiếp theo sau 1 giây
             } else {
                 resultDiv.innerText = `❌ Sai rồi. Đáp án đúng là: ${correctAnswer}`;
-                speak(selectedOption.value);
+                speak(questionData.value);
             }
         }
 

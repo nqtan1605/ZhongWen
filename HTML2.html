@@ -402,8 +402,16 @@
 
         const lessons = [...new Set(questions.map(q => q.lesson))].sort((a, b) => a - b);
         const select = document.getElementById('lesson');
-        select.innerHTML = '<option value="all">Tất cả</option>' + 
-        lessons.map(lesson => `<option value="${lesson}">Bài ${lesson}</option>`).join('');
+        select.innerHTML = '<option value="all">Tất cả</option>' +
+            lessons.map(lesson => `<option value="${lesson}">Bài ${lesson}</option>`).join('');
+
+        // function googleTranslateElementInit() {
+        // new google.translate.TranslateElement(
+        //     {pageLanguage: 'vi', includedLanguages: 'zh-CN,zh-TW,vi,en'},
+        //     'google_translate_element'
+        // );
+        // }
+
 
         // Hàm xáo trộn mảng
         function shuffleArray(arr) {
@@ -424,24 +432,32 @@
         // Hàm xử lý khi thay đổi lesson
         function onLessonChange() {
             const lessonSelect = document.getElementById('lesson');
-            const selectedLesson = lessonSelect.value;
-            filterQuestionsByLesson(selectedLesson);
+            filterQuestionsByLesson(lessonSelect.value);
         }
 
         function createQuestion(questionIndex) {
-            if (questionIndex >= filteredQuestions.length) {const quizContainer = document.getElementById('quiz-container');quizContainer.innerHTML = '<div class="quiz-container"><div id="result">🎉 Bạn đã hoàn thành bài quiz!</div></div>';return;
+            if (questionIndex >= filteredQuestions.length) {
+                const quizContainer = document.getElementById('quiz-container'); 
+                quizContainer.innerHTML = '<div class="quiz-container"><div id="result">🎉 Bạn đã hoàn thành bài quiz!</div></div>'; 
+                return;
             }
 
             const questionData = filteredQuestions[questionIndex];
             const quizContainer = document.getElementById('quiz-container');
             quizContainer.innerHTML = ''; // Xóa câu hỏi cũ nếu có
 
+            // const existingHistory = document.getElementById('input-history');
+            // quizContainer.innerHTML = '';
+            // if (existingHistory) {
+            //     quizContainer.appendChild(existingHistory);
+            // }
+
             const quizBlock = document.createElement('div');
             quizBlock.classList.add('quiz-container');
 
             const questionElement = document.createElement('div');
             questionElement.classList.add('question');
-            questionElement.innerText = `Câu hỏi ${questionIndex + 1}: ${questionData.question}`;
+            questionElement.innerText = `Câu hỏi ${ questionIndex + 1}: ${ questionData.question}`;
             quizBlock.appendChild(questionElement);
 
             // Xáo trộn các đáp án
@@ -449,11 +465,23 @@
             shuffleArray(shuffledOptions);
 
             // Tạo các đáp án
-            shuffledOptions.forEach(option => {const optionDiv = document.createElement('div');optionDiv.classList.add('option');const radioButton = document.createElement('input');radioButton.type = 'radio';radioButton.name = `answer`;radioButton.value = option;// radioButton.onclick = function () {//     speak(option);// };const label = document.createElement('label');label.innerText = option;optionDiv.appendChild(radioButton);optionDiv.appendChild(label);quizBlock.appendChild(optionDiv);
-            });
+            shuffledOptions.forEach(
+                option => {const optionDiv = document.createElement('div'); 
+                optionDiv.classList.add('option'); 
+                const radioButton = document.createElement('input'); 
+                radioButton.type = 'radio'; 
+                radioButton.name = `answer`; 
+                radioButton.value = option; 
+                radioButton.onclick = function () { speak(option); }; 
+                const label = document.createElement('label'); 
+                label.innerText = option; 
+                optionDiv.appendChild(radioButton); 
+                optionDiv.appendChild(label); 
+                quizBlock.appendChild(optionDiv);
+            }); 
 
             const resultDiv = document.createElement('div');
-            resultDiv.id = `result`;
+            resultDiv.id = 'result';
             quizBlock.appendChild(resultDiv);
 
             const checkButton = document.createElement('button');
@@ -462,9 +490,13 @@
             quizBlock.appendChild(checkButton);
 
             quizContainer.appendChild(quizBlock);
-            const example = document.createElement('div'); 
-            example.id= 'example';
-            quizContainer.appendChild(example);
+
+            const radioButton1 = document.createElement('input'); 
+            radioButton1.type = 'text'; 
+            radioButton1.id = 'text1';
+            quizContainer.appendChild(radioButton1);
+            
+
         }
 
         function speak(text) {
@@ -478,14 +510,43 @@
             const resultDiv = document.getElementById('result');
             const correctAnswer = filteredQuestions[questionIndex].correct;
             const correctPinyin = filteredQuestions[questionIndex].pinyin;
-            const questionData = filteredQuestions[questionIndex];
-            if (!selectedOption) {resultDiv.innerText = "Vui lòng chọn một đáp án!";return;
+            
+            
+            // const textInputValue = textInput.value;
+            // let historyDiv = document.getElementById('input-history');
+            // if (!historyDiv) {
+            //     historyDiv = document.createElement('div');
+            //     historyDiv.id = 'input-history';
+            //     document.getElementById('quiz-container').appendChild(historyDiv);
+            // }
+            // const historyItem = document.createElement('p');
+            // historyItem.innerText = `Đầu vào: ${textInputValue || 'Không có nội dung'}`;
+            // historyDiv.appendChild(historyItem);
+
+            if (!selectedOption) {resultDiv.innerText = "Vui lòng chọn một đáp án!"; return;
             }
 
-            if (selectedOption.value === correctAnswer) {resultDiv.innerText = "✅ Chính xác! " + correctPinyin;speak(correctAnswer);const text1 = document.getElementById('text1');
-text1.innerHTML = '';setTimeout(() => {    currentQuestionIndex++;    createQuestion(currentQuestionIndex);}, 1000); // Chuyển sang câu hỏi tiếp theo sau 1 giây
-            } else {resultDiv.innerText = `❌ Sai rồi. Đáp án đúng là: ${correctAnswer}`;speak(questionData.value);
+            if (selectedOption.value === correctAnswer) {
+                resultDiv.innerText = "✅ Chính xác! " + correctPinyin; 
+                speak(correctAnswer); 
+                const text1 = document.getElementById('text1');
+                text1.innerHTML = '';
+                const textInput = document.getElementById('text1');
+                // Ghi log vào div input-log
+                const logDiv = document.getElementById('input-log');
+                const logItem = document.createElement('p');
+                logItem.innerText = `- : ${textInput.value || 'Không có nội dung'}`;
+                logDiv.appendChild(logItem);
+                setTimeout(() => { currentQuestionIndex++; 
+                    createQuestion(currentQuestionIndex); }, 1000); // Chuyển sang câu hỏi tiếp theo sau 1 giây
+            } else {
+                resultDiv.innerText = `❌ Sai rồi. Đáp án đúng là: ${correctAnswer}`; 
+                speak(selectedOption.value);
             }
+            // const example = document.getElementById('example');
+            // const valueExample = document.createElement('p'); 
+            // valueExample.innerHTML = 'a';
+            // example.appendChild(valueExample);
         }
 
         // Bắt đầu quiz

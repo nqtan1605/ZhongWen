@@ -109,7 +109,29 @@ button:hover {
     border-color: rgba(255, 67, 9, 0.5);
     box-shadow: 0 0 10px rgba(255, 67, 9, 0.5);
 }
+
+#text1{
+    width: 50%;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 67, 9, 0.5);
+    box-sizing: border-box;
+    font-size: 22px;
+    transition: 0.3s ease;
+    outline: none;
+}
+#text1:focus{
+    border-color: rgba(255, 67, 9, 0.5);
+    box-shadow: 0 0 10px rgba(255, 67, 9, 0.5);
+}
+
 #quiz-container{
     padding-left: 300px;
     width: 80%;
 }
+
+/* #example{
+    background-color: red;
+    height: 50px;
+    color: white;
+} */

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Quiz - Chọn đáp án đúng</title>
     <link rel="stylesheet" href="https://nqtan1605.github.io/ZhongWen/style.css">
-    <!-- <link rel="stylesheet" href="/style.css"> -->
+    <link rel="stylesheet" href="/style.css">
 
 </head>
 
@@ -16,16 +16,20 @@
             <select id=lesson onchange="onLessonChange()">
             </select>
         </div>
-         <div id="quiz-container">
+        <div id="quiz-container">
         </div>
     </div>
-   
+
     <div id="main-menu">
         <ul>
             <li><a href="https://nqtan1605.github.io/ZhongWen/HTML.html">汉语 - 越南语</a></li>
             <li><a href="https://nqtan1605.github.io/ZhongWen/HTML2.html">越南语 - 汉语</a></li>
         </ul>
     </div>
+    <!-- <div id="google_translate_element"></div>
+    <script type="text/javascript" 
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script> -->
     <script>
         const questions = [
             { question: "Bây giờ", options: ["现在", "跟", "课文", "练习"], correct: "现在", pinyin: "xiànzài", lesson: 16 },
@@ -276,73 +280,132 @@
             { question: "Đường", options: ["路", "到", "足球场", "往"], correct: "路", pinyin: "lù", lesson: 23 },
             { question: "Tòa, chỗ", options: ["座", "红绿灯", "绿", "右"], correct: "座", pinyin: "zuò", lesson: 23 },
             { question: "Màu trắng", options: ["白色", "地方", "米", "拐"], correct: "白色", pinyin: "báisè", lesson: 23 },
-            {question: "biết",options: ["现在", "会", "课文", "练习"],correct: "会",pinyin: "huì",lesson: 24},
-            {question: "đánh",options: ["打", "跟", "现在", "练习"],correct: "打",pinyin: "dǎ",lesson: 24},
-            {question: "thái cực quyền",options: ["太极拳", "课文", "现在", "跟"],correct: "太极拳",pinyin: "tàijíquán",lesson: 24},
-            {question: "nghe nói",options: ["听说", "练习", "跟", "现在"],correct: "听说",pinyin: "tīngshuō",lesson: 24},
-            {question: "xuống",options: ["下", "现在", "课文", "练习"],correct: "下",pinyin: "xià",lesson: 24},
-            {question: "đăng ký",options: ["报名", "跟", "现在", "课文"],correct: "报名",pinyin: "bàomíng",lesson: 24},
-            {question: "bắt đầu",options: ["开始", "练习", "现在", "跟"],correct: "开始",pinyin: "kāishǐ",lesson: 24},
-            {question: "có thể",options: ["能", "课文", "跟", "现在"],correct: "能",pinyin: "néng",lesson: 24},
-            {question: "lại",options: ["再", "现在", "练习", "课文"],correct: "再",pinyin: "zài",lesson: 24},
-            {question: "lần",options: ["遍", "跟", "现在", "练习"],correct: "遍",pinyin: "biàn",lesson: 24},
-            {question: "hiểu",options: ["懂", "课文", "现在", "跟"],correct: "懂",pinyin: "dǒng",lesson: 24},
-            {question: "thoải mái",options: ["舒服", "练习", "跟", "现在"],correct: "舒服",pinyin: "shūfu",lesson: 24},
-            {question: "ý nghĩa",options: ["意思", "现在", "课文", "练习"],correct: "意思",pinyin: "yìsi",lesson: 24},
-            {question: "lượt",options: ["次", "跟", "现在", "课文"],correct: "次",pinyin: "cì",lesson: 24},
-            {question: "giờ",options: ["小时", "练习", "现在", "跟"],correct: "小时",pinyin: "xiǎoshí",lesson: 24},
-            {question: "xin nghỉ",options: ["请假", "课文", "跟", "现在"],correct: "请假",pinyin: "qǐngjià",lesson: 24},
-            {question: "đau đầu",options: ["头疼", "现在", "练习", "课文"],correct: "头疼",pinyin: "tóuténg",lesson: 24},
-            {question: "sốt",options: ["发烧", "跟", "现在", "练习"],correct: "发烧",pinyin: "fāshāo",lesson: 24},
-            {question: "có thể",options: ["可能", "课文", "现在", "跟"],correct: "可能",pinyin: "kěnéng",lesson: 24},
-            {question: "ho",options: ["咳嗽", "练习", "跟", "现在"],correct: "咳嗽",pinyin: "késòu",lesson: 24},
-            {question: "cảm cúm",options: ["感冒", "现在", "课文", "练习"],correct: "感冒",pinyin: "gǎnmào",lesson: 24},
-            {question: "khám bệnh",options: ["看病", "跟", "现在", "课文"],correct: "看病",pinyin: "kànbìng",lesson: 24},
-            {question: "bệnh",options: ["病", "练习", "现在", "跟"],correct: "病",pinyin: "bìng",lesson: 24},
-            {question: "lái xe",options: ["开车", "课文", "跟", "现在"],correct: "开车",pinyin: "kāichē",lesson: 24},
-            {question: "bơi lội",options: ["游泳", "现在", "练习", "课文"],correct: "游泳",pinyin: "yóuyǒng",lesson: 24},
-            {question: "câu cá",options: ["钓鱼", "跟", "现在", "练习"],correct: "钓鱼",pinyin: "diàoyú",lesson: 24},
-            {question: "đỗ xe",options: ["停车", "课文", "现在", "跟"],correct: "停车",pinyin: "tíngchē",lesson: 24},
-            {question: "trượt băng",options: ["滑冰", "练习", "跟", "现在"],correct: "滑冰",pinyin: "huábīng",lesson: 24},
-            {question: "chụp ảnh",options: ["拍照", "现在", "课文", "练习"],correct: "拍照",pinyin: "pāizhào",lesson: 24},
-            {question: "hút thuốc",options: ["抽烟", "跟", "现在", "课文"],correct: "抽烟",pinyin: "chōuyān",lesson: 24},
-            {question: "hát",options: ["唱歌", "练习", "现在", "跟"],correct: "唱歌",pinyin: "chànggē",lesson: 24},
-            {question: "nhảy múa",options: ["跳舞", "课文", "现在", "练习"],correct: "跳舞",pinyin: "tiàowǔ",lesson: 24},
-            {question: "chơi bóng rổ",options: ["打篮球", "跟", "现在", "课文"],correct: "打篮球",pinyin: "dǎlánqiú",lesson: 24},
-            {question: "hộ chiếu",options: ["护照", "练习", "跟", "现在"],correct: "护照",pinyin: "hùzhào",lesson: 24},
-            {question: "đài truyền hình",options: ["电视台", "节目", "现在", "练习"],correct: "电视台",pinyin: "diànshìtái",lesson: 25},
-            {question: "đài",options: ["台", "跟", "开始", "课文"],correct: "台",pinyin: "tái",lesson: 25},
-            {question: "biểu diễn",options: ["表演", "现在", "愿意", "练习"],correct: "表演",pinyin: "biǎoyǎn",lesson: 25},
-            {question: "chương trình",options: ["节目", "课文", "现在", "跟"],correct: "节目",pinyin: "jiémù",lesson: 25},
-            {question: "sẵn lòng",options: ["愿意", "练习", "现在", "为什么"],correct: "愿意",pinyin: "yuànyì",lesson: 25},
-            {question: "tại sao",options: ["为什么", "跟", "现在", "课文"],correct: "为什么",pinyin: "wèishénme",lesson: 25},
-            {question: "phải",options: ["得", "现在", "练习", "开始"],correct: "得",pinyin: "děi",lesson: 25},
-            {question: "tốt",options: ["不错", "课文", "现在", "跟"],correct: "不错",pinyin: "bùcuò",lesson: 25},
-            {question: "sai",options: ["错", "练习", "现在", "愿意"],correct: "错",pinyin: "cuò",lesson: 25},
-            {question: "tiến bộ",options: ["进步", "跟", "现在", "课文"],correct: "进步",pinyin: "jìnbù",lesson: 25},
-            {question: "trình độ",options: ["水平", "现在", "练习", "开始"],correct: "水平",pinyin: "shuǐpíng",lesson: 25},
-            {question: "nâng cao",options: ["提高", "课文", "现在", "跟"],correct: "提高",pinyin: "tígāo",lesson: 25},
-            {question: "nhanh",options: ["快", "练习", "现在", "为什么"],correct: "快",pinyin: "kuài",lesson: 25},
-            {question: "đâu",options: ["哪里", "跟", "现在", "课文"],correct: "哪里",pinyin: "nǎlǐ",lesson: 25},
-            {question: "chuẩn",options: ["准", "现在", "练习", "开始"],correct: "准",pinyin: "zhǔn",lesson: 25},
-            {question: "lưu loát",options: ["流利", "课文", "现在", "跟"],correct: "流利",pinyin: "liúlì",lesson: 25},
-            {question: "nỗ lực",options: ["努力", "练习", "现在", "为什么"],correct: "努力",pinyin: "nǔlì",lesson: 25},
-            {question: "nghiêm túc",options: ["认真", "跟", "现在", "课文"],correct: "认真",pinyin: "rènzhēn",lesson: 25},
-            {question: "xem",options: ["看", "现在", "练习", "开始"],correct: "看",pinyin: "kàn",lesson: 25},
-            {question: "vì",options: ["为", "课文", "现在", "跟"],correct: "为",pinyin: "wèi",lesson: 25},
-            {question: "vậy",options: ["这么", "练习", "现在", "为什么"],correct: "这么",pinyin: "zhème",lesson: 25},
-            {question: "thế",options: ["那么", "跟", "现在", "课文"],correct: "那么",pinyin: "nàme",lesson: 25},
-            {question: "sớm",options: ["早", "现在", "练习", "开始"],correct: "早",pinyin: "zǎo",lesson: 25},
-            {question: "thể thao",options: ["运动", "课文", "现在", "跟"],correct: "运动",pinyin: "yùndòng",lesson: 25},
-            {question: "chạy bộ",options: ["跑步", "练习", "现在", "为什么"],correct: "跑步",pinyin: "pǎobù",lesson: 25},
-            {question: "chạy",options: ["跑", "跟", "现在", "课文"],correct: "跑",pinyin: "pǎo",lesson: 25},
-            {question: "bóng rổ",options: ["篮球", "现在", "练习", "开始"],correct: "篮球",pinyin: "lánqiú",lesson: 25},
-            {question: "bóng",options: ["球", "课文", "现在", "跟"],correct: "球",pinyin: "qiú",lesson: 25},
-            {question: "vừa nãy",options: ["刚才", "练习", "现在", "为什么"],correct: "刚才",pinyin: "gāngcái",lesson: 25},
-            {question: "được",options: ["可以", "跟", "现在", "课文"],correct: "可以",pinyin: "kěyǐ",lesson: 25},
-            {question: "kiên trì",options: ["坚持", "现在", "练习", "开始"],correct: "坚持",pinyin: "jiānchí",lesson: 25},
-            {question: "bởi vì",options: ["因为", "课文", "现在", "跟"],correct: "因为",pinyin: "yīnwèi",lesson: 25},
-            {question: "muộn",options: ["晚", "练习", "现在", "为什么"],correct: "晚",pinyin: "wǎn",lesson: 25}
+            { question: "biết", options: ["现在", "会", "课文", "练习"], correct: "会", pinyin: "huì", lesson: 24 },
+            { question: "đánh", options: ["打", "跟", "现在", "练习"], correct: "打", pinyin: "dǎ", lesson: 24 },
+            { question: "thái cực quyền", options: ["太极拳", "课文", "现在", "跟"], correct: "太极拳", pinyin: "tàijíquán", lesson: 24 },
+            { question: "nghe nói", options: ["听说", "练习", "跟", "现在"], correct: "听说", pinyin: "tīngshuō", lesson: 24 },
+            { question: "xuống", options: ["下", "现在", "课文", "练习"], correct: "下", pinyin: "xià", lesson: 24 },
+            { question: "đăng ký", options: ["报名", "跟", "现在", "课文"], correct: "报名", pinyin: "bàomíng", lesson: 24 },
+            { question: "bắt đầu", options: ["开始", "练习", "现在", "跟"], correct: "开始", pinyin: "kāishǐ", lesson: 24 },
+            { question: "có thể", options: ["能", "课文", "跟", "现在"], correct: "能", pinyin: "néng", lesson: 24 },
+            { question: "lại", options: ["再", "现在", "练习", "课文"], correct: "再", pinyin: "zài", lesson: 24 },
+            { question: "lần", options: ["遍", "跟", "现在", "练习"], correct: "遍", pinyin: "biàn", lesson: 24 },
+            { question: "hiểu", options: ["懂", "课文", "现在", "跟"], correct: "懂", pinyin: "dǒng", lesson: 24 },
+            { question: "thoải mái", options: ["舒服", "练习", "跟", "现在"], correct: "舒服", pinyin: "shūfu", lesson: 24 },
+            { question: "ý nghĩa", options: ["意思", "现在", "课文", "练习"], correct: "意思", pinyin: "yìsi", lesson: 24 },
+            { question: "lượt", options: ["次", "跟", "现在", "课文"], correct: "次", pinyin: "cì", lesson: 24 },
+            { question: "giờ", options: ["小时", "练习", "现在", "跟"], correct: "小时", pinyin: "xiǎoshí", lesson: 24 },
+            { question: "xin nghỉ", options: ["请假", "课文", "跟", "现在"], correct: "请假", pinyin: "qǐngjià", lesson: 24 },
+            { question: "đau đầu", options: ["头疼", "现在", "练习", "课文"], correct: "头疼", pinyin: "tóuténg", lesson: 24 },
+            { question: "sốt", options: ["发烧", "跟", "现在", "练习"], correct: "发烧", pinyin: "fāshāo", lesson: 24 },
+            { question: "có thể", options: ["可能", "课文", "现在", "跟"], correct: "可能", pinyin: "kěnéng", lesson: 24 },
+            { question: "ho", options: ["咳嗽", "练习", "跟", "现在"], correct: "咳嗽", pinyin: "késòu", lesson: 24 },
+            { question: "cảm cúm", options: ["感冒", "现在", "课文", "练习"], correct: "感冒", pinyin: "gǎnmào", lesson: 24 },
+            { question: "khám bệnh", options: ["看病", "跟", "现在", "课文"], correct: "看病", pinyin: "kànbìng", lesson: 24 },
+            { question: "bệnh", options: ["病", "练习", "现在", "跟"], correct: "病", pinyin: "bìng", lesson: 24 },
+            { question: "lái xe", options: ["开车", "课文", "跟", "现在"], correct: "开车", pinyin: "kāichē", lesson: 24 },
+            { question: "bơi lội", options: ["游泳", "现在", "练习", "课文"], correct: "游泳", pinyin: "yóuyǒng", lesson: 24 },
+            { question: "câu cá", options: ["钓鱼", "跟", "现在", "练习"], correct: "钓鱼", pinyin: "diàoyú", lesson: 24 },
+            { question: "đỗ xe", options: ["停车", "课文", "现在", "跟"], correct: "停车", pinyin: "tíngchē", lesson: 24 },
+            { question: "trượt băng", options: ["滑冰", "练习", "跟", "现在"], correct: "滑冰", pinyin: "huábīng", lesson: 24 },
+            { question: "chụp ảnh", options: ["拍照", "现在", "课文", "练习"], correct: "拍照", pinyin: "pāizhào", lesson: 24 },
+            { question: "hút thuốc", options: ["抽烟", "跟", "现在", "课文"], correct: "抽烟", pinyin: "chōuyān", lesson: 24 },
+            { question: "hát", options: ["唱歌", "练习", "现在", "跟"], correct: "唱歌", pinyin: "chànggē", lesson: 24 },
+            { question: "nhảy múa", options: ["跳舞", "课文", "现在", "练习"], correct: "跳舞", pinyin: "tiàowǔ", lesson: 24 },
+            { question: "chơi bóng rổ", options: ["打篮球", "跟", "现在", "课文"], correct: "打篮球", pinyin: "dǎlánqiú", lesson: 24 },
+            { question: "hộ chiếu", options: ["护照", "练习", "跟", "现在"], correct: "护照", pinyin: "hùzhào", lesson: 24 },
+            { question: "đài truyền hình", options: ["电视台", "节目", "现在", "练习"], correct: "电视台", pinyin: "diànshìtái", lesson: 25 },
+            { question: "đài", options: ["台", "跟", "开始", "课文"], correct: "台", pinyin: "tái", lesson: 25 },
+            { question: "biểu diễn", options: ["表演", "现在", "愿意", "练习"], correct: "表演", pinyin: "biǎoyǎn", lesson: 25 },
+            { question: "chương trình", options: ["节目", "课文", "现在", "跟"], correct: "节目", pinyin: "jiémù", lesson: 25 },
+            { question: "sẵn lòng", options: ["愿意", "练习", "现在", "为什么"], correct: "愿意", pinyin: "yuànyì", lesson: 25 },
+            { question: "tại sao", options: ["为什么", "跟", "现在", "课文"], correct: "为什么", pinyin: "wèishénme", lesson: 25 },
+            { question: "phải", options: ["得", "现在", "练习", "开始"], correct: "得", pinyin: "děi", lesson: 25 },
+            { question: "tốt", options: ["不错", "课文", "现在", "跟"], correct: "不错", pinyin: "bùcuò", lesson: 25 },
+            { question: "sai", options: ["错", "练习", "现在", "愿意"], correct: "错", pinyin: "cuò", lesson: 25 },
+            { question: "tiến bộ", options: ["进步", "跟", "现在", "课文"], correct: "进步", pinyin: "jìnbù", lesson: 25 },
+            { question: "trình độ", options: ["水平", "现在", "练习", "开始"], correct: "水平", pinyin: "shuǐpíng", lesson: 25 },
+            { question: "nâng cao", options: ["提高", "课文", "现在", "跟"], correct: "提高", pinyin: "tígāo", lesson: 25 },
+            { question: "nhanh", options: ["快", "练习", "现在", "为什么"], correct: "快", pinyin: "kuài", lesson: 25 },
+            { question: "đâu", options: ["哪里", "跟", "现在", "课文"], correct: "哪里", pinyin: "nǎlǐ", lesson: 25 },
+            { question: "chuẩn", options: ["准", "现在", "练习", "开始"], correct: "准", pinyin: "zhǔn", lesson: 25 },
+            { question: "lưu loát", options: ["流利", "课文", "现在", "跟"], correct: "流利", pinyin: "liúlì", lesson: 25 },
+            { question: "nỗ lực", options: ["努力", "练习", "现在", "为什么"], correct: "努力", pinyin: "nǔlì", lesson: 25 },
+            { question: "nghiêm túc", options: ["认真", "跟", "现在", "课文"], correct: "认真", pinyin: "rènzhēn", lesson: 25 },
+            { question: "xem", options: ["看", "现在", "练习", "开始"], correct: "看", pinyin: "kàn", lesson: 25 },
+            { question: "vì", options: ["为", "课文", "现在", "跟"], correct: "为", pinyin: "wèi", lesson: 25 },
+            { question: "vậy", options: ["这么", "练习", "现在", "为什么"], correct: "这么", pinyin: "zhème", lesson: 25 },
+            { question: "thế", options: ["那么", "跟", "现在", "课文"], correct: "那么", pinyin: "nàme", lesson: 25 },
+            { question: "sớm", options: ["早", "现在", "练习", "开始"], correct: "早", pinyin: "zǎo", lesson: 25 },
+            { question: "thể thao", options: ["运动", "课文", "现在", "跟"], correct: "运动", pinyin: "yùndòng", lesson: 25 },
+            { question: "chạy bộ", options: ["跑步", "练习", "现在", "为什么"], correct: "跑步", pinyin: "pǎobù", lesson: 25 },
+            { question: "chạy", options: ["跑", "跟", "现在", "课文"], correct: "跑", pinyin: "pǎo", lesson: 25 },
+            { question: "bóng rổ", options: ["篮球", "现在", "练习", "开始"], correct: "篮球", pinyin: "lánqiú", lesson: 25 },
+            { question: "bóng", options: ["球", "课文", "现在", "跟"], correct: "球", pinyin: "qiú", lesson: 25 },
+            { question: "vừa nãy", options: ["刚才", "练习", "现在", "为什么"], correct: "刚才", pinyin: "gāngcái", lesson: 25 },
+            { question: "được", options: ["可以", "跟", "现在", "课文"], correct: "可以", pinyin: "kěyǐ", lesson: 25 },
+            { question: "kiên trì", options: ["坚持", "现在", "练习", "开始"], correct: "坚持", pinyin: "jiānchí", lesson: 25 },
+            { question: "bởi vì", options: ["因为", "课文", "现在", "跟"], correct: "因为", pinyin: "yīnwèi", lesson: 25 },
+            { question: "muộn", options: ["晚", "练习", "现在", "为什么"], correct: "晚", pinyin: "wǎn", lesson: 25 },
+            { question: "muộn",options: ["晚", "练习", "现在", "为什么"],correct: "晚",pinyin: "wǎn",lesson: 26},
+            { question: "gọi điện thoại",options: ["打电话", "关机", "开机", "考试"],correct: "打电话",pinyin: "dǎ diànhuà",lesson: 26},
+            { question: "mở máy",options: ["开机", "关机", "考试", "见面"],correct: "开机",pinyin: "kāijī",lesson: 26},
+            { question: "tắt máy",options: ["关机", "开机", "考试", "比赛"],correct: "关机",pinyin: "guānjī",lesson: 26},
+            { question: "gặp mặt",options: ["见面", "考试", "送行", "陪"],correct: "见面",pinyin: "jiànmiàn",lesson: 26},
+            { question: "cuộc thi",options: ["比赛", "考试", "踢", "队"],correct: "比赛",pinyin: "bǐsài",lesson: 26},
+            { question: "thi",options: ["考试", "比", "赢", "输"],correct: "考试",pinyin: "kǎoshì",lesson: 26},
+            { question: "đội bóng",options: ["队", "输", "赢", "陪"],correct: "队",pinyin: "duì",lesson: 26},
+            { question: "thắng",options: ["赢", "输", "考试", "陪"],correct: "赢",pinyin: "yíng",lesson: 26},
+            { question: "thua",options: ["输", "赢", "比", "踢"],correct: "输",pinyin: "shū",lesson: 26},
+            { question: "đá (bóng)",options: ["踢", "哭", "陪", "送行"],correct: "踢",pinyin: "tī",lesson: 26},
+            { question: "so với",options: ["比", "对了", "向", "阿姨"],correct: "比",pinyin: "bǐ",lesson: 26},
+            { question: "chúc mừng",options: ["祝贺", "预祝", "成功", "坚持"],correct: "祝贺",pinyin: "zhùhè",lesson: 26},
+            { question: "à (thán từ)",options: ["哎", "阿姨", "喂", "哭"],correct: "哎",pinyin: "āi",lesson: 26},
+            { question: "thi TOEFL",options: ["托福", "考试", "考", "陪"],correct: "托福",pinyin: "Tuōfú",lesson: 26},
+            { question: "đã",options: ["已经", "又", "刚才", "可以"],correct: "已经",pinyin: "yǐjīng",lesson: 26},
+            { question: "thi (động từ)",options: ["考", "考试", "比", "哭"],correct: "考",pinyin: "kǎo",lesson: 26},
+            { question: "đi cùng",options: ["陪", "坚持", "向", "见面"],correct: "陪",pinyin: "péi",lesson: 26},
+            { question: "vừa nãy",options: ["刚才", "又", "现在", "可以"],correct: "刚才",pinyin: "gāngcái",lesson: 26},
+            { question: "có thể",options: ["可以", "坚持", "成功", "送行"],correct: "可以",pinyin: "kěyǐ",lesson: 26},
+            { question: "kiên trì",options: ["坚持", "陪", "考试", "向"],correct: "坚持",pinyin: "jiānchí",lesson: 26},
+            { question: "bởi vì",options: ["因为", "又", "向", "对了"],correct: "因为",pinyin: "yīnwèi",lesson: 26},
+            { question: "đạt điểm tuyệt đối",options: ["满分", "考试", "奖学金", "成功"],correct: "满分",pinyin: "mǎnfēn",lesson: 26},
+            { question: "tốt nhất",options: ["最", "成功", "哭", "送行"],correct: "最",pinyin: "zuì",lesson: 26},
+            { question: "học bổng",options: ["奖学金", "成功", "预祝", "见面"],correct: "奖学金",pinyin: "jiǎngxuéjīn",lesson: 26},
+            { question: "tiễn biệt",options: ["送行", "哭", "成功", "坚持"],correct: "送行",pinyin: "sòngxíng",lesson: 26},
+            { question: "chúc trước",options: ["预祝", "祝贺", "最", "向"],correct: "预祝",pinyin: "yùzhù",lesson: 26},
+            { question: "thành công",options: ["成功", "最", "奖学金", "陪"],correct: "成功",pinyin: "chénggōng",lesson: 26},
+            { question: "thượng lộ bình an",options: ["一路平安", "送行", "预祝", "成功"],correct: "一路平安",pinyin: "yīlù píng’ān",lesson: 26},
+            { question: "khóc",options: ["哭", "哎", "陪", "对了"],correct: "哭",pinyin: "kū",lesson: 26},
+            {question: "rồi",options: ["了", "得", "后", "别"],correct: "了",pinyin: "le",lesson: 27},
+            {question: "bệnh nhân",options: ["病人", "医生", "护士", "检查"],correct: "病人",pinyin: "bìngrén",lesson: 27},
+            {question: "bụng",options: ["肚子", "头", "手", "腿"],correct: "肚子",pinyin: "dùzi",lesson: 27},
+            {question: "dữ dội, nghiêm trọng",options: ["厉害", "寂寞", "难过", "别"],correct: "厉害",pinyin: "lìhai",lesson: 27},
+            {question: "viên (thuốc)",options: ["片", "针", "包", "瓶"],correct: "片",pinyin: "piàn",lesson: 27},
+            {question: "tiêu chảy",options: ["拉肚子", "哭", "检查", "难过"],correct: "拉肚子",pinyin: "lā dùzi",lesson: 27},
+            {question: "cá",options: ["鱼", "牛肉", "大便", "药"],correct: "鱼",pinyin: "yú",lesson: 27},
+            {question: "thịt bò",options: ["牛肉", "鱼", "药", "礼堂"],correct: "牛肉",pinyin: "niúròu",lesson: 27},
+            {question: "xét nghiệm",options: ["化验", "检查", "打针", "开药"],correct: "化验",pinyin: "huàyàn",lesson: 27},
+            {question: "đại tiện",options: ["大便", "小便", "化验", "得"],correct: "大便",pinyin: "dàbiàn",lesson: 27},
+            {question: "tiểu tiện",options: ["小便", "大便", "拉肚子", "哭"],correct: "小便",pinyin: "xiǎobiàn",lesson: 27},
+            {question: "kiểm tra",options: ["检查", "化验", "打针", "跳舞"],correct: "检查",pinyin: "jiǎnchá",lesson: 27},
+            {question: "kết quả",options: ["结果", "考试", "检查", "礼堂"],correct: "结果",pinyin: "jiéguǒ",lesson: 27},
+            {question: "ra (kết quả, thông tin)",options: ["出来", "得", "打针", "哭"],correct: "出来",pinyin: "chūlái",lesson: 27},
+            {question: "mắc (bệnh)",options: ["得", "了", "后", "拉肚子"],correct: "得",pinyin: "dé",lesson: 27},
+            {question: "viêm ruột",options: ["肠炎", "肚子", "化验", "大便"],correct: "肠炎",pinyin: "chángyán",lesson: 27},
+            {question: "tiêu hóa",options: ["消化", "化验", "检查", "得"],correct: "消化",pinyin: "xiāohuà",lesson: 27},
+            {question: "kê (thuốc)",options: ["开", "打", "化", "得"],correct: "开",pinyin: "kāi",lesson: 27},
+            {question: "chích thuốc",options: ["打针", "开药", "检查", "哭"],correct: "打针",pinyin: "dǎzhēn",lesson: 27},
+            {question: "sau",options: ["后", "别", "得", "哭"],correct: "后",pinyin: "hòu",lesson: 27},
+            {question: "cô đơn",options: ["寂寞", "难过", "哭", "厉害"],correct: "寂寞",pinyin: "jìmò",lesson: 27},
+            {question: "vì vậy",options: ["所以", "得", "后", "别"],correct: "所以",pinyin: "suǒyǐ",lesson: 27},
+            {question: "đừng",options: ["别", "得", "了", "跳舞"],correct: "别",pinyin: "bié",lesson: 27},
+            {question: "buồn",options: ["难过", "寂寞", "哭", "跳舞"],correct: "难过",pinyin: "nánguò",lesson: 27},
+            {question: "hội trường",options: ["礼堂", "舞会", "跳舞", "开药"],correct: "礼堂",pinyin: "lǐtáng",lesson: 27},
+            {question: "dạ hội",options: ["舞会", "礼堂", "跳舞", "打针"],correct: "舞会",pinyin: "wǔhuì",lesson: 27},
+            {question: "nhảy (múa)",options: ["跳舞", "舞会", "哭", "别"],correct: "跳舞",pinyin: "tiàowǔ",lesson: 27
+            }
+
         ];
 
         let currentQuestionIndex = 0;
@@ -350,8 +413,16 @@
 
         const lessons = [...new Set(questions.map(q => q.lesson))].sort((a, b) => a - b);
         const select = document.getElementById('lesson');
-        select.innerHTML = '<option value="all">Tất cả</option>' + 
-        lessons.map(lesson => `<option value="${lesson}">Bài ${lesson}</option>`).join('');
+        select.innerHTML = '<option value="all">Tất cả</option>' +
+            lessons.map(lesson => `<option value="${lesson}">Bài ${lesson}</option>`).join('');
+
+        // function googleTranslateElementInit() {
+        // new google.translate.TranslateElement(
+        //     {pageLanguage: 'vi', includedLanguages: 'zh-CN,zh-TW,vi,en'},
+        //     'google_translate_element'
+        // );
+        // }
+
 
         // Hàm xáo trộn mảng
         function shuffleArray(arr) {
@@ -372,12 +443,11 @@
         // Hàm xử lý khi thay đổi lesson
         function onLessonChange() {
             const lessonSelect = document.getElementById('lesson');
-            const selectedLesson = lessonSelect.value;
-            filterQuestionsByLesson(selectedLesson);
+            filterQuestionsByLesson(lessonSelect.value);
         }
 
         function createQuestion(questionIndex) {
-            if (questionIndex >= filteredQuestions.length) {const quizContainer = document.getElementById('quiz-container');quizContainer.innerHTML = '<div class="quiz-container"><div id="result">🎉 Bạn đã hoàn thành bài quiz!</div></div>';return;
+            if (questionIndex >= filteredQuestions.length) {const quizContainer = document.getElementById('quiz-container'); quizContainer.innerHTML = '<div class="quiz-container"><div id="result">🎉 Bạn đã hoàn thành bài quiz!</div></div>'; return;
             }
 
             const questionData = filteredQuestions[questionIndex];
@@ -389,7 +459,7 @@
 
             const questionElement = document.createElement('div');
             questionElement.classList.add('question');
-            questionElement.innerText = `Câu hỏi ${questionIndex + 1}: ${questionData.question}`;
+            questionElement.innerText = `Câu hỏi ${ questionIndex + 1}: ${ questionData.question}`;
             quizBlock.appendChild(questionElement);
 
             // Xáo trộn các đáp án
@@ -397,11 +467,11 @@
             shuffleArray(shuffledOptions);
 
             // Tạo các đáp án
-            shuffledOptions.forEach(option => {const optionDiv = document.createElement('div');optionDiv.classList.add('option');const radioButton = document.createElement('input');radioButton.type = 'radio';radioButton.name = `answer`;radioButton.value = option;radioButton.onclick = function () {    speak(option);};const label = document.createElement('label');label.innerText = option;optionDiv.appendChild(radioButton);optionDiv.appendChild(label);quizBlock.appendChild(optionDiv);
-            });
+            shuffledOptions.forEach(option => {const optionDiv = document.createElement('div'); optionDiv.classList.add('option'); const radioButton = document.createElement('input'); radioButton.type = 'radio'; radioButton.name = `answer`; radioButton.value = option; radioButton.onclick = function () { speak(option); }; const label = document.createElement('label'); label.innerText = option; optionDiv.appendChild(radioButton); optionDiv.appendChild(label); quizBlock.appendChild(optionDiv);
+            }); 
 
             const resultDiv = document.createElement('div');
-            resultDiv.id = `result`;
+            resultDiv.id = 'result';
             quizBlock.appendChild(resultDiv);
 
             const checkButton = document.createElement('button');
@@ -410,6 +480,15 @@
             quizBlock.appendChild(checkButton);
 
             quizContainer.appendChild(quizBlock);
+
+            const radioButton1 = document.createElement('input'); 
+            radioButton1.type = 'text'; 
+            radioButton1.id = 'text1';
+            quizContainer.appendChild(radioButton1);
+
+            const example = document.createElement('div'); 
+            example.id= 'example';
+            quizContainer.appendChild(example);
         }
 
         function speak(text) {
@@ -424,17 +503,26 @@
             const correctAnswer = filteredQuestions[questionIndex].correct;
             const correctPinyin = filteredQuestions[questionIndex].pinyin;
 
-            if (!selectedOption) {resultDiv.innerText = "Vui lòng chọn một đáp án!";return;
+            if (!selectedOption) {resultDiv.innerText = "Vui lòng chọn một đáp án!"; return;
             }
 
-            if (selectedOption.value === correctAnswer) {resultDiv.innerText = "✅ Chính xác! " + correctPinyin;speak(correctAnswer);setTimeout(() => {    currentQuestionIndex++;    createQuestion(currentQuestionIndex);}, 1000); // Chuyển sang câu hỏi tiếp theo sau 1 giây
-            } else {resultDiv.innerText = `❌ Sai rồi. Đáp án đúng là: ${correctAnswer}`;speak(selectedOption.value);
+            if (selectedOption.value === correctAnswer) {
+                resultDiv.innerText = "✅ Chính xác! " + correctPinyin; 
+                speak(correctAnswer); 
+                const text1 = document.getElementById('text1');
+                text1.innerHTML = '';
+                setTimeout(() => { currentQuestionIndex++; createQuestion(currentQuestionIndex); }, 1000); // Chuyển sang câu hỏi tiếp theo sau 1 giây
+            } else {resultDiv.innerText = `❌ Sai rồi. Đáp án đúng là: ${correctAnswer}`; speak(selectedOption.value);
             }
+            // const example = document.getElementById('example');
+            // const valueExample = document.createElement('p'); 
+            // valueExample.innerHTML = 'a';
+            // example.appendChild(valueExample);
         }
 
         // Bắt đầu quiz
         filterQuestionsByLesson('all'); // Default to all questions
-        
+
     </script>
 
 </body>

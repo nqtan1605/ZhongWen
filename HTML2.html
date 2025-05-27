@@ -514,17 +514,6 @@
             const correctAnswer = filteredQuestions[questionIndex].correct;
             const correctPinyin = filteredQuestions[questionIndex].pinyin;
             
-            
-            // const textInputValue = textInput.value;
-            // let historyDiv = document.getElementById('input-history');
-            // if (!historyDiv) {
-            //     historyDiv = document.createElement('div');
-            //     historyDiv.id = 'input-history';
-            //     document.getElementById('quiz-container').appendChild(historyDiv);
-            // }
-            // const historyItem = document.createElement('p');
-            // historyItem.innerText = `Đầu vào: ${textInputValue || 'Không có nội dung'}`;
-            // historyDiv.appendChild(historyItem);
 
             if (!selectedOption) {resultDiv.innerText = "Vui lòng chọn một đáp án!"; return;
             }
@@ -538,7 +527,14 @@
                 // Ghi log vào div input-log
                 const logDiv = document.getElementById('input-log');
                 const logItem = document.createElement('p');
-                logItem.innerText = `- : ${textInput.value || 'Không có nội dung'}`;
+                // logItem.innerText = `- : ${textInput.value || 'Không có nội dung'}`;
+                const userText = textInput.value || 'Không có nội dung';
+                const highlightedText = userText
+                .split('')
+                .map(char => correctAnswer.includes(char) ? `<span style="color: red;">${char}</span>` : char)
+                .join('');
+
+                logItem.innerHTML = `-  ${highlightedText}`;
                 logDiv.appendChild(logItem);
                 setTimeout(() => { currentQuestionIndex++; 
                     createQuestion(currentQuestionIndex); }, 1000); // Chuyển sang câu hỏi tiếp theo sau 1 giây
@@ -546,10 +542,7 @@
                 resultDiv.innerText = `❌ Sai rồi. Đáp án đúng là: ${correctAnswer}`; 
                 speak(selectedOption.value);
             }
-            // const example = document.getElementById('example');
-            // const valueExample = document.createElement('p'); 
-            // valueExample.innerHTML = 'a';
-            // example.appendChild(valueExample);
+
         }
 
         // Bắt đầu quiz

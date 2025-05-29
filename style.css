@@ -148,6 +148,7 @@ button:hover {
     width: 80%;
     align-items: start;
     color: white;
+    margin-bottom: 50px;
 }
 table {
     width: 50%;

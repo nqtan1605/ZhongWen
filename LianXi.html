@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Quiz - Chọn đáp án đúng</title>
-    <link rel="stylesheet" href="https://nqtan1605.github.io/ZhongWen/style.css">
-    <!-- <link rel="stylesheet" href="/style.css"> -->
+    <!-- <link rel="stylesheet" href="https://nqtan1605.github.io/ZhongWen/style.css"> -->
+    <link rel="stylesheet" href="/style.css">
 
 </head>
 
@@ -425,7 +425,7 @@
 
         const lessons = [...new Set(questions.map(q => q.lesson))].sort((a, b) => a - b);
         const select = document.getElementById('lesson');
-        select.innerHTML = 
+        select.innerHTML = '<option value="all">Tất cả</option>' +
             lessons.map(lesson => `<option value="${lesson}">Bài ${lesson}</option>`).join('');
 
         // Hàm xáo trộn mảng
@@ -457,10 +457,11 @@
             filterQuestionsByLesson(lessonSelect.value);
         }
 
-        function onShuffle() {
-            shuffleArray(filteredQuestions); // Xáo trộn filteredQuestions
-            currentQuestionIndex = 0;
-            displayQuestionsTable(currentQuestionIndex); // Cập nhật bảng
+        function onShuffle(type) {    
+            shuffleArray(filteredQuestions);
+            shuffleArray(questions);
+            // Xáo trộn filteredQuestions
+            displayQuestionsTable(); // Cập nhật bảng
         }
 
         function toggleColumns() {
@@ -481,7 +482,7 @@
             const tableBody = document.getElementById('table-body');
             tableBody.innerHTML = ''; // Xóa nội dung bảng cũ
             const currentLesson = document.getElementById('lesson').value;
-            const questionsToDisplay = currentLesson === 16
+            const questionsToDisplay = currentLesson === 'all'
                 ? questions 
                 // : questions.filter(q => q.lesson === parseInt(currentLesson));
                 :filteredQuestions.filter(q => q.lesson === parseInt(currentLesson));
@@ -489,12 +490,6 @@
             questionsToDisplay.forEach(q => {
                 const row = document.createElement('tr');
                 const inputId = `input-${q.question}`;
-                // row.innerHTML = `
-                //     <td>${q.question}</td>
-                //     <td>${q.pinyin}</td>
-                //     <td>${q.correct}</td>
-                //     <td><input type='text' id="${inputId}" class='input-hanyu' placeholder ='Nhập vào đây'></input></id>
-                // `;
                 row.innerHTML = `
                     <td class="${columnsHidden ? 'hidden' : ''}">${q.question}</td>
                     <td class="${columnsHidden ? 'hidden' : ''}">${q.pinyin}</td>

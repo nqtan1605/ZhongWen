@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Quiz - Chọn đáp án đúng</title>
-    <link rel="stylesheet" href="https://nqtan1605.github.io/ZhongWen/style.css">
-    <!-- <link rel="stylesheet" href="/style.css"> -->
+    <!-- <link rel="stylesheet" href="https://nqtan1605.github.io/ZhongWen/style.css"> -->
+    <link rel="stylesheet" href="/style.css">
 
 </head>
 
@@ -478,8 +478,7 @@
                 filteredQuestions = questions.filter(q => q.lesson === parseInt(lesson));
             }
             shuffleArray(filteredQuestions); // Xáo trộn câu hỏi
-            currentQuestionIndex = 0; // Reset chỉ số câu hỏi
-            displayQuestionsTable(currentQuestionIndex); // Hiển thị câu hỏi đầu tiên
+            displayQuestionsTable(); // Hiển thị câu hỏi đầu tiên
         }
 
         // Hàm xử lý khi thay đổi lesson
@@ -517,7 +516,6 @@
                 ? questions
                 // : questions.filter(q => q.lesson === parseInt(currentLesson));
                 : filteredQuestions.filter(q => q.lesson === parseInt(currentLesson));
-
             questionsToDisplay.forEach(q => {
                 const row = document.createElement('tr');
                 const inputId = `input-${q.question}`;
@@ -538,9 +536,13 @@
                     } else {
                         parentTd.classList.remove('correct');
                     }
+                    const correctNow = document.querySelectorAll('.correct').length;
+                    if (correctNow === questionsToDisplay.length && questionsToDisplay.length > 0) {
+                        alert("🎉 Bạn đã hoàn thành tất cả câu hỏi đúng!");
+                    }
                 });
             });
-
+            
         }
         displayQuestionsTable();
 

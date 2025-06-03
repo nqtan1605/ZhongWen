@@ -150,6 +150,8 @@ button:hover {
     align-items: start;
     color: white;
     margin-bottom: 50px;
+    height: 90vh;
+    overflow-y: scroll;
 }
 table {
     width: 80%;
@@ -157,6 +159,7 @@ table {
     border-collapse: collapse;
     font-family: Arial, sans-serif;
     height: fit-content;
+    
 }
 td {
     border: 1px solid #ddd;
@@ -196,7 +199,15 @@ th {
     margin: 10px 0 0 0;
     padding-bottom: 5px;
     border: unset;
+    height: 50px;
+    margin-right: 10px;
 }
 .hidden {
     display: none; /* Ẩn cột */
+}
+
+#scrollToTop{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
 }

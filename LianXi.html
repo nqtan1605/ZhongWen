@@ -19,8 +19,8 @@
             <select id=lesson onchange="onLessonChange()">
             </select>
         </div>
+        <button id="hide-col" onclick="toggleColumns()">Hide</button>
         <div id="question-table">
-            <button id="hide-col" onclick="toggleColumns()">Hide</button>
             <table>
                 <thead>
                     <tr>
@@ -43,6 +43,7 @@
             <li><a href="https://nqtan1605.github.io/ZhongWen/LianXi.html">练习</a></li>
         </ul>
     </div>
+    <button onclick="scrollToTop()" id="scrollToTop">Lên</button>
     <!-- <div id="google_translate_element"></div>
     <script type="text/javascript" 
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
@@ -493,7 +494,11 @@
             // Xáo trộn filteredQuestions
             displayQuestionsTable(); // Cập nhật bảng
         }
-
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-CN'; // Ngôn ngữ tiếng Trung
+            speechSynthesis.speak(utterance);
+        }
         function toggleColumns() {
             columnsHidden = !columnsHidden; // Toggle state
             const hanyuCells = document.querySelectorAll('.col-hanyu, td:nth-child(1)');
@@ -533,6 +538,7 @@
                 input.addEventListener('input', function () {
                     if (this.value.trim() === q.question) {
                         parentTd.classList.add('correct');
+                        speak(q.question);
                     } else {
                         parentTd.classList.remove('correct');
                     }
@@ -544,6 +550,17 @@
             });
             
         }
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        document.addEventListener('keydown', function(event) {
+            if (event.key.toLowerCase() === 'h') {
+                document.getElementById('hide-col').click();
+            }
+        });
         displayQuestionsTable();
 
     </script>

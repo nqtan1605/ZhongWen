@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Quiz - Chọn đáp án đúng</title>
-    <link rel="stylesheet" href="https://nqtan1605.github.io/ZhongWen/style.css">
-    <!-- <link rel="stylesheet" href="/style.css"> -->
+    <!-- <link rel="stylesheet" href="https://nqtan1605.github.io/ZhongWen/style.css"> -->
+    <link rel="stylesheet" href="/style.css">
 
 </head>
 
@@ -23,7 +23,7 @@
         <div id="question-table">
             <table>
                 <thead>
-                    <tr>
+                    <tr id="first-header">
                         <th class="col-hanyu">Tiếng Trung</th>
                         <th class="col-pinyin">Pinyin</th>
                         <th>Tiếng Việt</th>
@@ -557,7 +557,7 @@
             });
         }
         document.addEventListener('keydown', function(event) {
-            if (event.key.toLowerCase() === 'h') {
+            if (event.key === 'Control') {
                 document.getElementById('hide-col').click();
             }
         });

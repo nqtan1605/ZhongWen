@@ -166,12 +166,6 @@ td {
     padding: 5px;
     text-align: left;
 }
-th {
-    border: 1px solid #ddd;
-    background-color: rgba(255, 67, 9, 0.5);;
-    font-weight: bold;
-    padding: 10px;
-}
 .input-hanyu{
     background-color: unset;
     border: unset;
@@ -210,4 +204,14 @@ th {
     position: fixed;
     bottom: 30px;
     right: 30px;
+}
+thead th{
+    /* position: sticky; */
+    /* top: 0px; */
+    /* z-index: 1; */
+    border: 1px solid #ddd;
+    background-color: rgba(255, 67, 9, 0.6);;
+    font-weight: bold;
+    padding: 10px;
+    outline: 1px;
 }
